@@ -14,7 +14,7 @@ const RegisterPage = () => {
     const [repeatPasswordRegister, setRepeatPasswordRegister] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [poisition, setPosition] = useState("");
+    const [position, setPosition] = useState("");
     const [location, setLocation] = useState("");
 
     const postRequest = (e) => {
@@ -41,8 +41,8 @@ const RegisterPage = () => {
                 <input type={"password"} placeholder={"Repeat password"} value={repeatPasswordRegister} onChange={((e) => setRepeatPasswordRegister(e.target.value))} required /> <br />
                 <input type={"fname"} placeholder={"First Name"} value={firstName} onChange={((e) => setFirstName(e.target.value))} required /> <br />
                 <input type={"lname"} placeholder={"Last Name"} value={lastName} onChange={((e) => setLastName(e.target.value))} required /> <br />
-                <input type={"lname"} placeholder={"Position"} value={position} onChange={((e) => setPosition(e.target.value))} required /> <br />
-                <input type={"lname"} placeholder={"Location"} value={location} onChange={((e) => setLocation(e.target.value))} required /> <br />
+                <input type={"position"} placeholder={"Position"} value={position} onChange={((e) => setPosition(e.target.value))} required /> <br />
+                <input type={"location"} placeholder={"Location"} value={location} onChange={((e) => setLocation(e.target.value))} required /> <br />
                 <button> Register </button> <br />
                 <Link to={"/loginpage"}> You have an account? Sign in! </Link>
             </div>
