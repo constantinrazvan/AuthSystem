@@ -3,12 +3,13 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { saveAccount } from "../redux/accountActions";
 import { Link } from "react-router-dom";
-import { Navigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import '../styles/Register.css';
 
 const RegisterPage = () => {
 
     useEffect(() => { document.title = "Register Page"; })
+    const navigate = useNavigate();
 
     const [emailRegister, setEmailRegister] = useState("");
     const [passwordRegister, setPasswordRegister] = useState("");
@@ -61,7 +62,7 @@ const RegisterPage = () => {
         <div className={"register-page"}>
             <h1> Register </h1>
             <div className={"register-form"}>
-                <input type={"pmail"} placeholder={"Email"} value={emailRegister} onChange={((e) => setEmailRegister(e.target.value))} required /> <br />
+                <input type={"email"} placeholder={"Email"} value={emailRegister} onChange={((e) => setEmailRegister(e.target.value))} required /> <br />
                 <input type={"password"} placeholder={"Password"} value={passwordRegister} onChange={((e) => setPasswordRegister(e.target.value))} required /> <br />
                 <input type={"password"} placeholder={"Repeat password"} value={repeatPasswordRegister} onChange={((e) => setRepeatPasswordRegister(e.target.value))} required /> <br />
                 <input type={"text"} placeholder={"First Name"} value={firstName} onChange={((e) => setFirstName(e.target.value))} required /> <br />
@@ -75,7 +76,7 @@ const RegisterPage = () => {
                     )}
                 <Link to={"/loginpage"}> You have an account? Sign in! </Link>
                 {error.length ? <span>{error}</span> : null}
-                {redirect && <Navigate to="/" />}
+                {redirect && navigate("/")}
             </div>
         </div>
     );
