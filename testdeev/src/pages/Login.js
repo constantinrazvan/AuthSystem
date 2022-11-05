@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import '../styles/Login.css';
 
 const Login = () => {
@@ -21,7 +22,8 @@ const Login = () => {
                 <div className={"login-form"}>
                     <input type={"email"} value={email} placeholder={"Email"} onChange={(e => setEmail(e.target.value))} /> <br />
                     <input type={"password"} value={password} placeholder={"Password"} onChange={(e => setPassword(e.target.value))} /> <br />
-                    <button onClick={submitHandler}> Login </button>
+                    <button onClick={submitHandler}> Login </button> <br />
+                    <Link to={"/registerpage"}> You don't have an account? Sign up! </Link>
                 </div>
             </div>
         </>
