@@ -1,18 +1,20 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import routes from "./routes/routes.js";
+import { register, login } from "../set/account";
 
 const app = express();
+const port = 4000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.use("/user", routes);
+app.post("/registerPage", register);
+app.post("/loginPage", login);
 
-app.listen(8080, () => {
-    console.log("Listening on 8080");
+app.listen(port, () => {
+    console.log(`Listening on ${port}`);
 });
 
 mongoose
@@ -21,7 +23,7 @@ mongoose
         useUnifiedTopology: true,
     })
     .then(() => {
-        console.log("connected to db");
+        console.log("Database is connected succesfully!");
     })
     .catch((err) => {
         console.log(err);

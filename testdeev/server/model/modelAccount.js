@@ -6,6 +6,8 @@ const accountSchema = mongoose.Schema ({
     repeatPassword: String,
     firstName: String,
     secondName: String,
+    position: String,
+    location: String
 });
 
 const Account = mongoose.model("Account", accountSchema);

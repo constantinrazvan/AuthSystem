@@ -1,4 +1,4 @@
-import Account from "../model/acc";
+import Account from "../model/modelAccount";
 import mongoose from "mongoose";
 import bcrypt from 'bcrypt';
 

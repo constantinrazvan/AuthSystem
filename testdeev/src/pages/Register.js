@@ -21,13 +21,15 @@ const RegisterPage = () => {
         e.preventDefault();
         axios({
             method: 'POST',
-            url: 'https://localhost:8080/user/register',
+            url: 'https://localhost:4000/registerPage',
             data: {
                 emailRegister,
                 passwordRegister,
                 repeatPasswordRegister,
                 firstName,
-                lastName
+                lastName,
+                position,
+                location
             }
         });
     }
