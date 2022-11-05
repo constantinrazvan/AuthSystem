@@ -64,10 +64,10 @@ const RegisterPage = () => {
                 <input type={"pmail"} placeholder={"Email"} value={emailRegister} onChange={((e) => setEmailRegister(e.target.value))} required /> <br />
                 <input type={"password"} placeholder={"Password"} value={passwordRegister} onChange={((e) => setPasswordRegister(e.target.value))} required /> <br />
                 <input type={"password"} placeholder={"Repeat password"} value={repeatPasswordRegister} onChange={((e) => setRepeatPasswordRegister(e.target.value))} required /> <br />
-                <input type={"fname"} placeholder={"First Name"} value={firstName} onChange={((e) => setFirstName(e.target.value))} required /> <br />
-                <input type={"lname"} placeholder={"Last Name"} value={lastName} onChange={((e) => setLastName(e.target.value))} required /> <br />
-                <input type={"position"} placeholder={"Position"} value={position} onChange={((e) => setPosition(e.target.value))} required /> <br />
-                <input type={"location"} placeholder={"Location"} value={location} onChange={((e) => setLocation(e.target.value))} required /> <br />
+                <input type={"text"} placeholder={"First Name"} value={firstName} onChange={((e) => setFirstName(e.target.value))} required /> <br />
+                <input type={"text"} placeholder={"Last Name"} value={lastName} onChange={((e) => setLastName(e.target.value))} required /> <br />
+                <input type={"text"} placeholder={"Position"} value={position} onChange={((e) => setPosition(e.target.value))} required /> <br />
+                <input type={"text"} placeholder={"Location"} value={location} onChange={((e) => setLocation(e.target.value))} required /> <br />
                 {loading ? (
                     <span>Loading...</span>
                 ) : (
