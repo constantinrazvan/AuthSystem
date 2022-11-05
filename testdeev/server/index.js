@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.post("/registerpagea", register);
+app.post("/registerpage", register);
 app.post("/loginpage", login);
 
 app.listen(port, () => {

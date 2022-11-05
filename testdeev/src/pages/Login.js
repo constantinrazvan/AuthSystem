@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
+import axios from "axios";
+import { SET_ACCOUNT } from "../redux/slices/account";
+import {useDispatch, useSelector} from "react-redux";
+
+/*
+razvan12@gmail.com
+razvan123
+* */
 
 const Login = () => {
 
@@ -8,25 +17,42 @@ const Login = () => {
         document.title = "Login Page";
     })
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const account = useSelector((state) => state.account);
+    console.log(Object.keys(account).length);
 
-    function submitHandler() {
-        console.log("logged in!");
-    }
+    useEffect(() => {
+        if(Object.keys(account).length) {
+            navigate("/");
+        }
+    }, [ account ]);
+
+    async function submitHandler(e) {
+         e.preventDefault();
+
+
+         const {data} = await axios.post(
+                "http://localhost:4000/loginpage",
+                {
+                    email: e.target.email.value,
+                    password: e.target.password.value
+                }
+            )
+            dispatch(SET_ACCOUNT(data));
+            navigate("/");
+     }
 
     return (
-        <>
-            <div className={"login-page"}>
-                <h1> Login </h1>
-                <div className={"login-form"}>
-                    <input type={"email"} value={email} placeholder={"Email"} onChange={(e => setEmail(e.target.value))} /> <br />
-                    <input type={"password"} value={password} placeholder={"Password"} onChange={(e => setPassword(e.target.value))} /> <br />
-                    <button onClick={submitHandler}> Login </button> <br />
-                    <Link to={"/registerpage"}> You don't have an account? Sign up! </Link>
-                </div>
+        <form onSubmit={submitHandler} className={"login-page"}>
+            <h1> Login </h1>
+            <div className={"login-form"}>
+                <input type={"email"} name={"email"} placeholder={"Email"} required /> <br />
+                <input type={"password"} name={"password"} placeholder={"Password"} required /> <br />
+                <button type={"submit"}> Login </button> <br />
+                <Link to={"/registerpage"}> You don't have an account? Sign up! </Link>
             </div>
-        </>
+        </form>
     );
 }
 

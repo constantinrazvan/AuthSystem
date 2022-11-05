@@ -5,17 +5,19 @@ import bcrypt from 'bcrypt';
 export const register = async (req, res) => {
     try {
         const saltRounds = 10;
-        const exists = await Account.find({ email: req.body.email });
+        const exists = await Account.find({ email: req.body.emailRegister });
         if (exists[0]) res.json({ error: "Email address is already in use!" });
         else
-            bcrypt.hash(req.body.password, saltRounds, async (err, hash) => {
+            bcrypt.hash(req.body.passwordRegister, saltRounds, async (err, hash) => {
                 if (err) console.log(err);
                 else {
                     const account = new Account({
-                        email: req.body.email,
+                        email: req.body.emailRegister,
                         password: hash,
                         firstName: req.body.firstName,
                         lastName: req.body.lastName,
+                        location: req.body.location,
+                        position: req.body.position
                     });
                     const saved = await account.save();
                     res.status(200).json(saved);

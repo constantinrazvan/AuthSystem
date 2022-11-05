@@ -1,15 +1,30 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { saveAccount } from "../redux/accountActions";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { SET_ACCOUNT } from "../redux/slices/account";
+import { useSelector } from 'react-redux';
+
 import '../styles/Register.css';
+
+/*
+*   razvan123@email.com
+*   razvan123
+* */
 
 const RegisterPage = () => {
 
     useEffect(() => { document.title = "Register Page"; })
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const account = useSelector((state) => state.account);
+
+    useEffect(() => {
+        if(Object.keys(account).length) {
+            navigate("/");
+        }
+    }, [ account ]);
 
     const [emailRegister, setEmailRegister] = useState("");
     const [passwordRegister, setPasswordRegister] = useState("");
@@ -23,23 +38,24 @@ const RegisterPage = () => {
     const [error, setError] = useState("");
     const [redirect, setRedirect] = useState(false);
 
-    const postRequest = () => {
-        axios({
+    const postRequest = async () => {
+        const {data} = await axios({
             method: 'POST',
             url: 'http://localhost:4000/registerpage',
             data: {
                 emailRegister,
                 passwordRegister,
-                repeatPasswordRegister,
                 firstName,
                 lastName,
                 position,
                 location
             }
         });
+        dispatch(SET_ACCOUNT(data));
+        navigate("/");
     }
 
-    const submitHandler = () => {
+    const submitHandler = async () => {
         if (
             !emailRegister.length ||
             !passwordRegister.length ||
@@ -55,7 +71,7 @@ const RegisterPage = () => {
         if (passwordRegister !== repeatPasswordRegister)
             return setError("Passwords do not match.");
         setError("");
-        postRequest();
+        await postRequest();
     };
 
     return (
@@ -76,7 +92,6 @@ const RegisterPage = () => {
                     )}
                 <Link to={"/loginpage"}> You have an account? Sign in! </Link>
                 {error.length ? <span>{error}</span> : null}
-                {redirect && navigate("/")}
             </div>
         </div>
     );
