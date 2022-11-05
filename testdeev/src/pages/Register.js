@@ -17,11 +17,14 @@ const RegisterPage = () => {
     const [position, setPosition] = useState("");
     const [location, setLocation] = useState("");
 
-    const postRequest = (e) => {
-        e.preventDefault();
+    const [loading, setloading] = useState(false);
+    const [error, setError] = useState("");
+    const [redirect, setRedirect] = useState(false);
+
+    const postRequest = () => {
         axios({
             method: 'POST',
-            url: 'https://localhost:4000/registerPage',
+            url: 'http://localhost:4000/registerpage',
             data: {
                 emailRegister,
                 passwordRegister,
@@ -34,6 +37,25 @@ const RegisterPage = () => {
         });
     }
 
+    const submitHandler = () => {
+        if (
+            !emailRegister.length ||
+            !passwordRegister.length ||
+            !repeatPasswordRegister.length ||
+            !firstName.length ||
+            !lastName.length ||
+            !position.length ||
+            !location.length
+        )
+            return setError("Please fill all fields.");
+        if (!emailRegister.includes("@"))
+            return setError("Provide a valid email address.");
+        if (passwordRegister !== repeatPasswordRegister)
+            return setError("Passwords do not match.");
+        setError("");
+        postRequest();
+    };
+
     return (
         <div className={"register-page"}>
             <h1> Register </h1>
@@ -45,7 +67,11 @@ const RegisterPage = () => {
                 <input type={"lname"} placeholder={"Last Name"} value={lastName} onChange={((e) => setLastName(e.target.value))} required /> <br />
                 <input type={"position"} placeholder={"Position"} value={position} onChange={((e) => setPosition(e.target.value))} required /> <br />
                 <input type={"location"} placeholder={"Location"} value={location} onChange={((e) => setLocation(e.target.value))} required /> <br />
-                <button> Register </button> <br />
+                {loading ? (
+                    <span>Loading...</span>
+                ) : (
+                <button onClick={submitHandler}> Register </button>
+                    )}
                 <Link to={"/loginpage"}> You have an account? Sign in! </Link>
             </div>
         </div>

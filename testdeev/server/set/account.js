@@ -1,8 +1,8 @@
-import Account from "../model/modelAccount";
+import Account from "../model/modelAccount.js";
 import mongoose from "mongoose";
 import bcrypt from 'bcrypt';
 
-const register = async (req, res) => {
+export const register = async (req, res) => {
     try {
         const saltRounds = 10;
         const exists = await Account.find({ email: req.body.email });
@@ -43,8 +43,4 @@ export const login = async (req, res) => {
         console.log(error);
         res.json(error);
     }
-};
-
-export const homepage = async () => {
-    console.log("hompage");
 };
