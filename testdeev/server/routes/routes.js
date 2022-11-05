@@ -1,7 +1,10 @@
-const express = require("express");
+import express from 'express';
+import { register, login, homepage } from "../set/account";
 
-const router = express.Router;
+const router = express.Router();
 
-router.post('registerPage');
-router.post('loginPage');
-router.post('homePage');
+router.post("/register", register);
+router.post("/login", login);
+router.post('/hompage', homepage);
+
+export default router;
