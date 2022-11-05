@@ -15,10 +15,11 @@ const RegisterPage = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
 
-    const postRequest = () => {
+    const postRequest = (e) => {
+        e.preventDefault();
         axios({
             method: 'POST',
-            url: '',
+            url: 'https://localhost:127.0.0.1:27017',
             data: {
                 emailRegister: emailRegister,
                 passwordRegister: passwordRegister,
