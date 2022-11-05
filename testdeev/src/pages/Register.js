@@ -3,6 +3,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { saveAccount } from "../redux/accountActions";
 import { Link } from "react-router-dom";
+import { Navigate } from "react-router";
 import '../styles/Register.css';
 
 const RegisterPage = () => {
@@ -73,6 +74,8 @@ const RegisterPage = () => {
                 <button onClick={submitHandler}> Register </button>
                     )}
                 <Link to={"/loginpage"}> You have an account? Sign in! </Link>
+                {error.length ? <span>{error}</span> : null}
+                {redirect && <Navigate to="/" />}
             </div>
         </div>
     );
