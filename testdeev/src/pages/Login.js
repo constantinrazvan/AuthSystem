@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
-import '../styles/Login.css';
+import { useNavigate }  from 'react-router-dom';
 import axios from "axios";
 import { SET_ACCOUNT } from "../redux/slices/account";
 import {useDispatch, useSelector} from "react-redux";
 
 /*
-razvan12@gmail.com
-razvan123
-* */
+**** Available account for login in ****
+    email: razvan12@gmail.com
+    password: razvan123
+****************************************
+*/
 
 const Login = () => {
 
@@ -30,7 +31,6 @@ const Login = () => {
 
     async function submitHandler(e) {
          e.preventDefault();
-
 
          const {data} = await axios.post(
                 "http://localhost:4000/loginpage",

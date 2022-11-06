@@ -6,8 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { SET_ACCOUNT } from "../redux/slices/account";
 import { useSelector } from 'react-redux';
 
-import '../styles/Register.css';
-
 /*
 *   razvan123@email.com
 *   razvan123
@@ -34,9 +32,8 @@ const RegisterPage = () => {
     const [position, setPosition] = useState("");
     const [location, setLocation] = useState("");
 
-    const [loading, setloading] = useState(false);
+    const [loading] = useState(false);
     const [error, setError] = useState("");
-    const [redirect, setRedirect] = useState(false);
 
     const postRequest = async () => {
         const {data} = await axios({
